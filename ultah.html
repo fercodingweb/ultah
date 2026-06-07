@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Ulang Tahun Feriadi! 🎉</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Confetti Particles */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .confetti.falling {
+            animation: fall 3s ease-in forwards;
+        }
+
+        /* Main Container */
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 90%;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Greeting Message */
+        .greeting {
+            opacity: 0;
+            transform: scale(0.5);
+            animation: greetingAppear 1s ease-out forwards;
+            margin-bottom: 30px;
+        }
+
+        @keyframes greetingAppear {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) rotateY(90deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotateY(0deg);
+            }
+        }
+
+        .greeting h1 {
+            font-size: 3em;
+            margin: 20px 0;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .greeting p {
+            font-size: 1.3em;
+            color: #333;
+            margin: 15px 0;
+            animation: slideIn 0.8s ease-out 0.3s forwards;
+            opacity: 0;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .age-display {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 20px 0;
+            animation: slideIn 0.8s ease-out 0.6s forwards;
+            opacity: 0;
+        }
+
+        /* Decorative Elements */
+        .decoration {
+            font-size: 4em;
+            display: inline-block;
+            margin: 0 10px;
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        .decoration:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .decoration:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .decoration:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-30px);
+            }
+        }
+
+        .message-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(240, 147, 251, 0.1));
+            border: 2px solid #667eea;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px 0;
+            animation: slideIn 0.8s ease-out 0.9s forwards;
+            opacity: 0;
+        }
+
+        .message-box p {
+            font-size: 1.1em;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Action Buttons */
+        .actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            animation: slideIn 0.8s ease-out 1.2s forwards;
+            opacity: 0;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 1em;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-celebrate {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-celebrate:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn-celebrate:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-music {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.3);
+        }
+
+        .btn-music:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(245, 87, 108, 0.5);
+        }
+
+        .btn-music:active {
+            transform: translateY(-1px);
+        }
+
+        /* Background Decorations */
+        .background-decor {
+            position: absolute;
+            font-size: 5em;
+            opacity: 0.1;
+            z-index: 1;
+            pointer-events: none;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-30px);
+            }
+        }
+
+        .bg-1 { top: 10%; left: 5%; animation-delay: 0s; }
+        .bg-2 { top: 15%; right: 10%; animation-delay: 1s; }
+        .bg-3 { bottom: 20%; left: 15%; animation-delay: 2s; }
+        .bg-4 { bottom: 10%; right: 5%; animation-delay: 3s; }
+
+        /* Audio Player (hidden but functional) */
+        audio {
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            .greeting h1 {
+                font-size: 2em;
+            }
+
+            .greeting p {
+                font-size: 1em;
+            }
+
+            .age-display {
+                font-size: 1.8em;
+            }
+
+            .decoration {
+                font-size: 3em;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+        }
+
+        /* Surprise Trigger */
+        .surprise-triggered {
+            animation: pulse 0.5s ease-out;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Decorations -->
+    <div class="background-decor bg-1">🎂</div>
+    <div class="background-decor bg-2">🎈</div>
+    <div class="background-decor bg-3">🎁</div>
+    <div class="background-decor bg-4">🎉</div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="greeting">
+            <div>
+                <span class="decoration">🎉</span>
+                <span class="decoration">🎈</span>
+                <span class="decoration">🎁</span>
+            </div>
+            
+            <h1>Selamat Ulang Tahun!</h1>
+            
+            <p id="name-display">Feriadi</p>
+            <p id="age-display" class="age-display"></p>
+
+            <div class="message-box">
+                <p>Semoga hari istimewamu dipenuhi dengan kebahagiaan, tawa, dan momen-momen indah bersama orang-orang terkasih. 🌟</p>
+            </div>
+
+            <div class="message-box">
+                <p>Terima kasih telah lahir ke dunia dan membawa kebahagiaan kepada orang-orang di sekitarmu. Semoga tahun ini menjadi tahun yang penuh dengan pencapaian dan petualangan baru! 🎊</p>
+            </div>
+
+            <div class="actions">
+                <button class="btn-celebrate" onclick="triggerCelebration()">🎉 Rayakan!</button>
+                <button class="btn-music" id="music-btn" onclick="toggleMusic()">🎵 Musik</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="happy-birthday-audio" loop>
+        <source src="birthday.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Configuration
+        const TARGET_NAME = 'Feriadi';
+        const TARGET_BIRTH_DATE = new Date(2004, 8, 18); // September 18, 2004 (month is 0-indexed)
+        
+        let musicPlaying = false;
+
+        // Calculate Age
+        function calculateAge(birthDate) {
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
+        // Check if today is birthday
+        function isBirthdayToday() {
+            const today = new Date();
+            return (today.getMonth() === TARGET_BIRTH_DATE.getMonth() && 
+                    today.getDate() === TARGET_BIRTH_DATE.getDate());
+        }
+
+        // Initialize Page
+        function initializePage() {
+            const age = calculateAge(TARGET_BIRTH_DATE);
+            document.getElementById('age-display').textContent = `Usia: ${age} tahun`;
+            
+            // Auto-trigger celebration if birthday
+            if (isBirthdayToday()) {
+                setTimeout(() => {
+                    triggerCelebration();
+                }, 500);
+            }
+        }
+
+        // Create Confetti Particle
+        function createConfetti() {
+            const confettiPiece = document.createElement('div');
+            confettiPiece.className = 'confetti';
+            
+            // Random confetti emojis
+            const emojis = ['🎉', '🎈', '🎁', '⭐', '🌟', '✨', '🎊', '🎀'];
+            const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+            
+            confettiPiece.textContent = randomEmoji;
+            confettiPiece.style.left = Math.random() * 100 + '%';
+            confettiPiece.style.top = '-20px';
+            confettiPiece.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            
+            // Add random rotation start
+            const randomRotation = Math.random() * 360;
+            confettiPiece.style.transform = `rotate(${randomRotation}deg)`;
+            
+            document.body.appendChild(confettiPiece);
+            
+            // Animate falling
+            setTimeout(() => {
+                confettiPiece.classList.add('falling');
+            }, 10);
+            
+            // Remove after animation
+            setTimeout(() => {
+                confettiPiece.remove();
+            }, 3000);
+        }
+
+        // Trigger Celebration
+        function triggerCelebration() {
+            // Add pulse animation
+            const container = document.querySelector('.container');
+            container.classList.add('surprise-triggered');
+            setTimeout(() => {
+                container.classList.remove('surprise-triggered');
+            }, 500);
+            
+            // Generate confetti
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    createConfetti();
+                }, i * 30);
+            }
+            
+            // Play music
+            if (!musicPlaying) {
+                toggleMusic();
+            }
+        }
+
+        // Toggle Music
+        function toggleMusic() {
+            const audio = document.getElementById('happy-birthday-audio');
+            const btn = document.getElementById('music-btn');
+            
+            if (musicPlaying) {
+                audio.pause();
+                btn.textContent = '🎵 Musik';
+                musicPlaying = false;
+            } else {
+                audio.currentTime = 0;
+                audio.play().catch(err => {
+                    console.log('Audio play error (might be autoplay restriction):', err);
+                    alert('Tekan tombol Musik sekali lagi untuk memainkan!');
+                });
+                btn.textContent = '⏸️ Pause';
+                musicPlaying = true;
+            }
+        }
+
+        // Audio ended listener
+        document.getElementById('happy-birthday-audio').addEventListener('ended', function() {
+            musicPlaying = false;
+            document.getElementById('music-btn').textContent = '🎵 Musik';
+        });
+
+        // Initialize on page load
+        window.addEventListener('load', initializePage);
+    </script>
+</body>
+</html>
